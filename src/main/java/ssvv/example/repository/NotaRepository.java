@@ -1,7 +1,7 @@
-package repository;
+package ssvv.example.repository;
 
-import domain.*;
-import validation.*;
+import ssvv.example.domain.*;
+import ssvv.example.validation.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

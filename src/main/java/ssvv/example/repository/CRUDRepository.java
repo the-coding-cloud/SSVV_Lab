@@ -1,5 +1,5 @@
-package repository;
-import validation.*;
+package ssvv.example.repository;
+import ssvv.example.validation.*;
 
 public interface CRUDRepository<ID, E> {
     /**

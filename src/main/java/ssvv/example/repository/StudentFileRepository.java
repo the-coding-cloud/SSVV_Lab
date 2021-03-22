@@ -1,7 +1,7 @@
-package repository;
+package ssvv.example.repository;
 
-import domain.Student;
-import validation.*;
+import ssvv.example.domain.Student;
+import ssvv.example.validation.*;
 
 import java.io.*;
 import java.util.stream.Collectors;

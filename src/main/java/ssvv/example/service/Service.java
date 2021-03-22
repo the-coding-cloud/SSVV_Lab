@@ -1,7 +1,7 @@
-package service;
+package ssvv.example.service;
 
-import domain.*;
-import repository.*;
+import ssvv.example.domain.*;
+import ssvv.example.repository.*;
 
 import java.time.LocalDate;
 import java.time.temporal.WeekFields;

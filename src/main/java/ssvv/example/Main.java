@@ -1,10 +1,10 @@
 
 
-import console.*;
-import domain.*;
-import repository.*;
-import service.*;
-import validation.*;
+import ssvv.example.console.*;
+import ssvv.example.domain.*;
+import ssvv.example.repository.*;
+import ssvv.example.service.*;
+import ssvv.example.validation.*;
 
 public class Main {
     public static void main(String[] args) {
