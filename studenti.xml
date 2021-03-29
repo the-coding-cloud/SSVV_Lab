@@ -12,10 +12,6 @@
         <Nume>Maria</Nume>
         <Grupa>222</Grupa>
     </student>
-    <student ID="123">
-        <Nume>John</Nume>
-        <Grupa>231</Grupa>
-    </student>
     <student ID="4">
         <Nume>Ion</Nume>
         <Grupa>227</Grupa>
