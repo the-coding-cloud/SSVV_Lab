@@ -52,4 +52,61 @@ public class AppTest
         assertEquals(1, service.saveStudent(id, "TestGood", 231));
     }
 
+    @Test
+    public void AddStudent_ValidID()
+    {
+        String id = "123";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, "TestGood", 231));
+    }
+
+    @Test
+    public void AddStudent_NullID()
+    {
+        assertEquals(0, service.saveStudent(null, "TestGood", 231));
+    }
+
+    @Test
+    public void AddStudent_NullName()
+    {
+        String id = "123";
+        service.deleteStudent(id);
+        assertEquals(0, service.saveStudent(id, null, 231));
+    }
+
+    @Test
+    public void AddStudent_DuplicateID()
+    {
+        String id = "123";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, "John", 231));
+        assertEquals(0, service.saveStudent(id, "John", 231));
+    }
+
+    @Test
+    public void AddStudent_IDEmptyString()
+    {
+        String id = "";
+        service.deleteStudent(id);
+        assertEquals(0, service.saveStudent(id, "TestGood", 231));
+    }
+
+    @Test
+    public void AddStudent_NameEmptyString()
+    {
+        String id = "12";
+        String name = "";
+        service.deleteStudent(id);
+        assertEquals(0, service.saveStudent(id, name, 231));
+    }
+
+    @Test
+    public void AddStudent_GroupLessThan110()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(0, service.saveStudent(id, name, 1));
+    }
+
 }
