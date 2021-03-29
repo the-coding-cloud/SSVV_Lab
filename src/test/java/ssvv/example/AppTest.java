@@ -5,9 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 
 import org.junit.Test;
+import ssvv.example.domain.Nota;
 import ssvv.example.domain.Student;
+import ssvv.example.domain.Tema;
 import ssvv.example.repository.NotaXMLRepository;
-import ssvv.example.repository.StudentFileRepository;
 import ssvv.example.repository.StudentXMLRepository;
 import ssvv.example.repository.TemaXMLRepository;
 import ssvv.example.service.Service;
@@ -16,52 +17,39 @@ import ssvv.example.validation.StudentValidator;
 import ssvv.example.validation.TemaValidator;
 import ssvv.example.validation.Validator;
 
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class AppTest
 {
+    final Validator<Student> studentValidator = new StudentValidator();
+    final Validator<Tema> temaValidator = new TemaValidator();
+    final Validator<Nota> notaValidator = new NotaValidator();
+    final StudentXMLRepository studentRepo = new StudentXMLRepository(studentValidator, "studenti.xml");
+    final TemaXMLRepository temaRepo = new TemaXMLRepository(temaValidator, "teme.xml");
+    final NotaXMLRepository notaRepo = new NotaXMLRepository(notaValidator, "note.xml");
+    final Service service = new Service(studentRepo, temaRepo, notaRepo);
+    String maxLenString;
+
+    public AppTest() {
+        char[] fill = new char [Integer.MAX_VALUE / 1000];
+        Arrays.fill(fill, 'a');
+        maxLenString = new String(fill);
+    }
+
     /**
      * Rigorous Test :-)
      */
-    @Test
-    public void NumberOfStudentsInRepoIs2()
-    {
-        AtomicReference<Integer> studentCounter = new AtomicReference<>(0);
-        Validator validator = new StudentValidator();
-        StudentFileRepository rep = new StudentFileRepository(validator,"studenti.txt");
-        rep.findAll().forEach(student -> { studentCounter.getAndSet(studentCounter.get() + 1);});
-        assertTrue( studentCounter.get() == 2 );
-    }
+
     @Test
     public void AddStudentSuccessfully()
     {
-        AtomicReference<Integer> studentCounter = new AtomicReference<>(0);
-        Validator studentValidator = new StudentValidator();
-        Validator temaValidator = new TemaValidator();
-        Validator notaValidator = new NotaValidator();
-
-        StudentXMLRepository studRep = new StudentXMLRepository(studentValidator, "studenti.xml");
-        TemaXMLRepository temaRep = new TemaXMLRepository(temaValidator, "teme.xml");
-        NotaXMLRepository notaRep = new NotaXMLRepository(notaValidator, "note.xml");
-        Service service = new Service(studRep,temaRep,notaRep);
-
         String id = "alksdjnfTest12";
         service.deleteStudent(id);
-        assertTrue( service.saveStudent(id,"TestGood",231) == 1 );
-
+        assertEquals(1, service.saveStudent(id, "TestGood", 231));
     }
-    @Test
-    public void FirstStudentIsConsistent()
-    {
 
-        Validator validator = new StudentValidator();
-        StudentFileRepository rep = new StudentFileRepository(validator,"studenti.txt");
-        Iterator<Student> iterator =rep.findAll().iterator();
-        assertEquals("1", iterator.next().getID());
-        assertEquals("2", iterator.next().getID());
-    }
 }

@@ -1,4 +1,4 @@
-
+package ssvv.example;
 
 import ssvv.example.console.*;
 import ssvv.example.domain.*;
