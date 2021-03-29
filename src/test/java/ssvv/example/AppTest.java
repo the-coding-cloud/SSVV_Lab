@@ -106,7 +106,52 @@ public class AppTest
         String id = "12";
         String name = "Test";
         service.deleteStudent(id);
-        assertEquals(0, service.saveStudent(id, name, 1));
+        assertEquals(0, service.saveStudent(id, name, 99));
+    }
+
+    @Test
+    public void AddStudent_GroupEqualTo110()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, name, 110));
+    }
+
+    @Test
+    public void AddStudent_GroupMoreThan110()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, name, 111));
+    }
+
+    @Test
+    public void AddStudent_GroupLessThan938()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, name, 937));
+    }
+
+    @Test
+    public void AddStudent_GroupEqualTo938()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(1, service.saveStudent(id, name, 938));
+    }
+
+    @Test
+    public void AddStudent_GroupMoreThan938()
+    {
+        String id = "12";
+        String name = "Test";
+        service.deleteStudent(id);
+        assertEquals(0, service.saveStudent(id, name, 939));
     }
 
 }
