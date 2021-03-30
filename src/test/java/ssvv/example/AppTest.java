@@ -154,5 +154,15 @@ public class AppTest
         assertEquals(0, service.saveStudent(id, name, 938));
     }
 
+    @Test
+    public void AddAssignment_WBT_1(){
+        service.deleteTema("123");
+        assertEquals(1, service.saveTema("123", "tema", 5, 2));
+    }
 
+    @Test
+    public void AddAssignment_WBT_2(){
+        service.deleteTema("123");
+        assertEquals(0, service.saveTema("123", "tema", 2, 5));
+    }
 }
