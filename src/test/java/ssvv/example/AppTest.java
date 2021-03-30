@@ -110,28 +110,28 @@ public class AppTest
     }
 
     @Test
-    public void AddStudent_GroupEqualTo111()
+    public void AddStudent_BVA_LowerBound()
     {
-        String id = "12";
-        String name = "Test";
+        String id = "1";
+        String name = "A";
         service.deleteStudent(id);
         assertEquals(1, service.saveStudent(id, name, 111));
     }
 
     @Test
-    public void AddStudent_GroupMoreThan111()
+    public void AddStudent_BVA_AboveLowerBound()
     {
         String id = "12";
-        String name = "Test";
+        String name = "AB";
         service.deleteStudent(id);
         assertEquals(1, service.saveStudent(id, name, 112));
     }
 
     @Test
-    public void AddStudent_GroupLessThan937()
+    public void AddStudent_BVA_BelowUpperBound()
     {
-        String id = "12";
-        String name = "Test";
+        String id = maxLenString.substring(1);
+        String name = maxLenString.substring(1);
         service.deleteStudent(id);
         assertEquals(1, service.saveStudent(id, name, 936));
     }
@@ -139,8 +139,8 @@ public class AppTest
     @Test
     public void AddStudent_GroupEqualTo937()
     {
-        String id = "12";
-        String name = "Test";
+        String id = maxLenString;
+        String name = maxLenString;
         service.deleteStudent(id);
         assertEquals(1, service.saveStudent(id, name, 937));
     }
@@ -153,5 +153,6 @@ public class AppTest
         service.deleteStudent(id);
         assertEquals(0, service.saveStudent(id, name, 938));
     }
+
 
 }
