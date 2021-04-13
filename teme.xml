@@ -10,6 +10,11 @@
         <Deadline>8</Deadline>
         <Startline>7</Startline>
     </tema>
+    <tema ID="123">
+        <Descriere>tema</Descriere>
+        <Deadline>5</Deadline>
+        <Startline>2</Startline>
+    </tema>
     <tema ID="3">
         <Descriere>gui</Descriere>
         <Deadline>9</Deadline>

@@ -162,7 +162,37 @@ public class AppTest
 
     @Test
     public void AddAssignment_WBT_2(){
+        // invalid startline
         service.deleteTema("123");
+        assertEquals(0, service.saveTema("123", "tema", 2, 5));
+    }
+
+    @Test
+    public void AddAssignment_WBT_3(){
+        // invalid deadline
+        service.deleteTema("123");
+        assertEquals(0, service.saveTema("123", "tema", -2, 5));
+    }
+
+    @Test
+    public void AddAssignment_WBT_4(){
+        // invalid id
+        service.deleteTema("123");
+        assertEquals(0, service.saveTema("", "tema", 2, 5));
+    }
+
+    @Test
+    public void AddAssignment_WBT_5(){
+        // invalid description
+        service.deleteTema("123");
+        assertEquals(0, service.saveTema("123", "", 2, 5));
+    }
+
+    @Test
+    public void AddAssignment_WBT_6(){
+        // duplicate id
+        service.deleteTema("123");
+        service.saveTema("123", "tema", 5, 2);
         assertEquals(0, service.saveTema("123", "tema", 2, 5));
     }
 }
