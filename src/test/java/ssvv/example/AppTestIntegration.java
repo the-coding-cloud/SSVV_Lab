@@ -35,42 +35,70 @@ public class AppTestIntegration
     String maxLenString;
 
     public AppTestIntegration() {
-        char[] fill = new char [Integer.MAX_VALUE / 1000];
-        Arrays.fill(fill, 'a');
-        maxLenString = new String(fill);
+
     }
 
-    /**
-     * Rigorous Test :-)
-     */
+    private void resetTestRepos(){
+        temaRepo.resetXMLFile();
+        notaRepo.resetXMLFile();
+        studentRepo.resetXMLFile();
+    }
 
     @Test
     public void AddStudent_Successfully()
     {
-        String id = "1234";
-        service.deleteStudent(id);
-        assertEquals(1, service.saveStudent(id, "StudentTest", 231));
+        resetTestRepos();
+        assertEquals(1, service.saveStudent("1", "StudentTest", 231));
     }
 
     @Test
     public void AddAssignment_Successfully(){
-        service.deleteTema("123");
+        resetTestRepos();
         assertEquals(1, service.saveTema("123", "tema", 5, 2));
     }
 
     @Test
     public void AddGrade_Successfully(){
+        resetTestRepos();
+        service.saveStudent("1234", "StudentTest", 231);
+        service.saveTema("123", "tema", 5, 2);
+
         assertEquals(1, service.saveNota("1234", "123", 9, 3, "yes"));
     }
 
     @Test
     public void AddStudentAssigGrade_Successfully(){
-        service.deleteTema("123");
-        service.deleteStudent("1234");
-        assertEquals(1, service.saveStudent("1234", "StudentTest", 231));
-        assertEquals(1, service.saveTema("123", "tema", 5, 2));
-        assertEquals(1, service.saveNota("1234", "123", 9, 3, "yes"));
+        resetTestRepos();
+
+        assertEquals(1, service.saveStudent("12345", "StudentTest", 231));
+        assertEquals(1, service.saveTema("1234", "tema", 5, 2));
+        assertEquals(1, service.saveNota("12345", "1234", 9, 3, "yes"));
     }
 
+    @Test
+    public void AddStudent_Incremental()
+    {
+        resetTestRepos();
+        assertEquals(1, service.saveStudent("1`", "StudentTest", 231));
+    }
 
+    @Test
+    public void AddStudentAssignment_Incremental()
+    {
+        resetTestRepos();
+
+        assertEquals(1, service.saveStudent("1", "Incremental Test", 231));
+        assertEquals(1, service.saveTema("1", "tema", 3, 1));
+    }
+
+    @Test
+    public void AddStudentAssignmentGrade_Incremental()
+    {
+        resetTestRepos();
+
+        assertEquals(1, service.saveStudent("1", "Incremental Test", 231));
+        assertEquals(1, service.saveTema("1", "tema", 3, 1));
+
+        assertEquals(1, service.saveNota("1", "1", 9, 2, "ok"));
+    }
 }

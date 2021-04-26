@@ -62,9 +62,9 @@ public class Service {
             Nota result = notaXmlRepo.save(nota);
 
             if (result == null) {
-                return 1;
+                return 0;
             }
-            return 0;
+            return 1;
         }
     }
 

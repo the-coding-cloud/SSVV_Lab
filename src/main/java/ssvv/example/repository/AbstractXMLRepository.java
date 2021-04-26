@@ -15,6 +15,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.IOException;
+import java.util.HashMap;
 
 public abstract class AbstractXMLRepository<ID, E extends HasID<ID>> extends AbstractCRUDRepository<ID, E> {
     protected String XMLfilename;
@@ -82,6 +83,23 @@ public abstract class AbstractXMLRepository<ID, E extends HasID<ID>> extends Abs
         Element element = XMLdocument.createElement(tag);
         element.setTextContent(value);
         return element;
+    }
+
+    public void resetXMLFile(){
+        try {
+            Document XMLdocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+            Element root = XMLdocument.createElement("Entitati");
+            XMLdocument.appendChild(root);
+
+            Transformer XMLtransformer = TransformerFactory.newInstance().newTransformer();
+            XMLtransformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            XMLtransformer.transform(new DOMSource(XMLdocument), new StreamResult(XMLfilename));
+        } catch(ParserConfigurationException | TransformerException pce) {
+            pce.printStackTrace();
+        }
+
+        this.entities =  new HashMap<ID, E>();
+        loadFromXmlFile();
     }
 
     @Override
