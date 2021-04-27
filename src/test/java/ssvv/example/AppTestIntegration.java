@@ -42,28 +42,31 @@ public class AppTestIntegration
         temaRepo.resetXMLFile();
         notaRepo.resetXMLFile();
         studentRepo.resetXMLFile();
+
+        studentRepo.save(new Student("1", "default", 231));
+        temaRepo.save(new Tema("1", "test tema", 4, 1));
     }
 
     @Test
     public void AddStudent_Successfully()
     {
         resetTestRepos();
-        assertEquals(1, service.saveStudent("1", "StudentTest", 231));
+
+        assertEquals(1, service.saveStudent("11", "StudentTest", 231));
     }
 
     @Test
     public void AddAssignment_Successfully(){
         resetTestRepos();
-        assertEquals(1, service.saveTema("123", "tema", 5, 2));
+
+        assertEquals(1, service.saveTema("11", "tema", 5, 2));
     }
 
     @Test
     public void AddGrade_Successfully(){
         resetTestRepos();
-        service.saveStudent("1234", "StudentTest", 231);
-        service.saveTema("123", "tema", 5, 2);
 
-        assertEquals(1, service.saveNota("1234", "123", 9, 3, "yes"));
+        assertEquals(1, service.saveNota("1", "1", 9, 3, "yes"));
     }
 
     @Test
@@ -76,10 +79,10 @@ public class AppTestIntegration
     }
 
     @Test
-    public void AddStudent_Incremental()
-    {
+    public void AddStudent_Incremental() {
         resetTestRepos();
-        assertEquals(1, service.saveStudent("1`", "StudentTest", 231));
+
+        assertEquals(1, service.saveStudent("11", "StudentTest", 231));
     }
 
     @Test
@@ -87,8 +90,8 @@ public class AppTestIntegration
     {
         resetTestRepos();
 
-        assertEquals(1, service.saveStudent("1", "Incremental Test", 231));
-        assertEquals(1, service.saveTema("1", "tema", 3, 1));
+        assertEquals(1, service.saveStudent("11", "Incremental Test", 231));
+        assertEquals(1, service.saveTema("11", "tema", 3, 1));
     }
 
     @Test
@@ -96,9 +99,9 @@ public class AppTestIntegration
     {
         resetTestRepos();
 
-        assertEquals(1, service.saveStudent("1", "Incremental Test", 231));
-        assertEquals(1, service.saveTema("1", "tema", 3, 1));
+        assertEquals(1, service.saveStudent("11", "Incremental Test", 231));
+        assertEquals(1, service.saveTema("11", "tema", 3, 1));
 
-        assertEquals(1, service.saveNota("1", "1", 9, 2, "ok"));
+        assertEquals(1, service.saveNota("11", "11", 9, 2, "ok"));
     }
 }
